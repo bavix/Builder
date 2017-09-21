@@ -45,7 +45,7 @@ class Builder extends Lumper
     public function router(): Router
     {
         return $this->once(function () {
-            return new Router($this->config()->get('resoler'));
+            return new Router($this->config()->get('resolver'));
         }, __METHOD__);
     }
 
