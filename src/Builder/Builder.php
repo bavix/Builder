@@ -45,7 +45,7 @@ class Builder extends Lumper
     public function router(): Router
     {
         return $this->once(function () {
-            return new Router($this->config()->get('resolver'));
+            return new Router(\config('resolver'));
         }, __METHOD__);
     }
 
@@ -58,10 +58,10 @@ class Builder extends Lumper
         $host   = filter_input(INPUT_SERVER, 'HTTP_HOST');
         $uri    = filter_input(INPUT_SERVER, 'REQUEST_URI');
 
-        $uriObject = $this->factory()->uri
+        $uriObject = \factory()->uri
             ->createUri($scheme . '://' . $host . $uri);
 
-        $request = $this->factory()->request->createServerRequest(
+        $request = \factory()->request->createServerRequest(
             filter_input(INPUT_SERVER, 'REQUEST_METHOD') ?? 'GET',
             $uriObject
         );
@@ -82,7 +82,7 @@ class Builder extends Lumper
     {
         return $this->once(function () {
 
-            $factory = $this->factory()->request;
+            $factory = \factory()->request;
 
             if (method_exists($factory, 'createServerRequestFromGlobals'))
             {
