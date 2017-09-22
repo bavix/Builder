@@ -93,10 +93,6 @@ class Builder extends Lumper
                 $request = $this->_request();
             }
 
-            $request = $request->withCookieParams(
-                $this->cookies()->export()
-            );
-
             if (method_exists($request, 'withRouter'))
             {
                 return $request->withRouter($this->router());
