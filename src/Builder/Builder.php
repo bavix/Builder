@@ -5,13 +5,13 @@ namespace Bavix\Builder;
 use Bavix\Config\Config;
 use Bavix\Context\Cookies;
 use Bavix\Context\Session;
-use Bavix\Lumper\Lumper;
+use Bavix\Lumper\Bind;
 use Bavix\Processors\Factory;
 use Bavix\Router\Router;
 use Bavix\SDK\Path;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Builder extends Lumper
+class Builder
 {
 
     /**
@@ -34,9 +34,9 @@ class Builder extends Lumper
      */
     public function config(): Config
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
             return new Config($this->root . 'etc');
-        }, __METHOD__);
+        });
     }
 
     /**
@@ -44,9 +44,9 @@ class Builder extends Lumper
      */
     public function router(): Router
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
             return new Router(\config('resolver'));
-        }, __METHOD__);
+        });
     }
 
     /**
@@ -80,7 +80,7 @@ class Builder extends Lumper
      */
     public function request(): ServerRequestInterface
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
 
             $factory = \factory()->request;
 
@@ -107,14 +107,14 @@ class Builder extends Lumper
      */
     public function session(): Session
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
 
             $content = \config('content');
             $slice   = $content->getSlice('session');
 
             return new Session($slice->getData('password'));
 
-        }, __METHOD__);
+        });
     }
 
     /**
@@ -122,14 +122,14 @@ class Builder extends Lumper
      */
     public function cookies(): Cookies
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
 
             $content = \config('content');
             $slice   = $content->getSlice('cookies');
 
             return new Cookies($slice->getData('password'));
 
-        }, __METHOD__);
+        });
     }
 
     /**
@@ -137,9 +137,9 @@ class Builder extends Lumper
      */
     public function factory(): Factory
     {
-        return $this->once(function () {
+        return Bind::once(__METHOD__, function () {
             return new Factory(\config('factory'));
-        }, __METHOD__);
+        });
     }
 
 }
