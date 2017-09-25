@@ -45,7 +45,7 @@ class Builder
     public function router(): Router
     {
         return Bind::once(__METHOD__, function () {
-            return new Router(\config('resolver'));
+            return new Router($this->config()->get('resolver'));
         });
     }
 
@@ -58,10 +58,10 @@ class Builder
         $host   = filter_input(INPUT_SERVER, 'HTTP_HOST');
         $uri    = filter_input(INPUT_SERVER, 'REQUEST_URI');
 
-        $uriObject = \factory()->uri
+        $uriObject = $this->factory()->uri
             ->createUri($scheme . '://' . $host . $uri);
 
-        $request = \factory()->request->createServerRequest(
+        $request = $this->factory()->request->createServerRequest(
             filter_input(INPUT_SERVER, 'REQUEST_METHOD') ?? 'GET',
             $uriObject
         );
@@ -82,7 +82,7 @@ class Builder
     {
         return Bind::once(__METHOD__, function () {
 
-            $factory = \factory()->request;
+            $factory = $this->factory()->request;
 
             if (method_exists($factory, 'createServerRequestFromGlobals'))
             {
@@ -109,7 +109,7 @@ class Builder
     {
         return Bind::once(__METHOD__, function () {
 
-            $content = \config('content');
+            $content = $this->config()->get('content');
             $slice   = $content->getSlice('session');
 
             return new Session($slice->getData('password'));
@@ -124,7 +124,7 @@ class Builder
     {
         return Bind::once(__METHOD__, function () {
 
-            $content = \config('content');
+            $content = $this->config()->get('content');
             $slice   = $content->getSlice('cookies');
 
             return new Cookies($slice->getData('password'));
@@ -138,7 +138,7 @@ class Builder
     public function factory(): Factory
     {
         return Bind::once(__METHOD__, function () {
-            return new Factory(\config('factory'));
+            return new Factory($this->config()->get('factory'));
         });
     }
 
