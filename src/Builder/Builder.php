@@ -149,7 +149,7 @@ class Builder
     public function flow(): Flow
     {
         return Bind::once(__METHOD__, function () {
-            return new Flow(null, $this->config()->get('flow'));
+            return new Flow(null, $this->config()->get('flow')->asArray());
         });
     }
 
