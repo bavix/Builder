@@ -5,6 +5,7 @@ namespace Bavix\Builder;
 use Bavix\Config\Config;
 use Bavix\Context\Cookies;
 use Bavix\Context\Session;
+use Bavix\Flow\Flow;
 use Bavix\Lumper\Bind;
 use Bavix\Processors\Factory;
 use Bavix\Router\Router;
@@ -139,6 +140,16 @@ class Builder
     {
         return Bind::once(__METHOD__, function () {
             return new Factory($this->config()->get('factory'));
+        });
+    }
+
+    /**
+     * @return Flow
+     */
+    public function flow(): Flow
+    {
+        return Bind::once(__METHOD__, function () {
+            return new Flow(null, $this->config()->get('flow'));
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Bavix\Flow\Flow;
 use Bavix\Builder\Builder;
 use Bavix\Config\Config;
 use Bavix\Context\Cookies;
@@ -54,6 +55,11 @@ class BuilderTest extends Unit
     public function testFactory()
     {
         $this->assertInstanceOf(Factory::class, $this->builder->factory());
+    }
+
+    public function testFlow()
+    {
+        $this->assertInstanceOf(Flow::class, $this->builder->flow());
     }
 
 }

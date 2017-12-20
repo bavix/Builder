@@ -15,6 +15,7 @@
     "bavix/config": "^1.0",
     "bavix/lumper": "^1.0",
     "bavix/router": "^1.0",
+    "bavix/flow": "^1.0",
     "bavix/http": "^0.0"
   },
   "require-dev": {
