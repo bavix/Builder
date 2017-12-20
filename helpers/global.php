@@ -1,5 +1,18 @@
 <?php
 
+if (!function_exists('builder'))
+{
+    /**
+     * @return \Bavix\Builder\Builder
+     */
+    function builder()
+    {
+        global $builder;
+
+        return $builder;
+    }
+}
+
 if (!function_exists('config'))
 {
     /**
