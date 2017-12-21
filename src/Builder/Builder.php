@@ -6,6 +6,7 @@ use Bavix\Config\Config;
 use Bavix\Context\Cookies;
 use Bavix\Context\Session;
 use Bavix\Flow\Flow;
+use Bavix\Http\ServerRequest;
 use Bavix\Lumper\Bind;
 use Bavix\Processors\Factory;
 use Bavix\Router\Router;
@@ -94,9 +95,12 @@ class Builder
                 $request = $this->_request();
             }
 
-            if (method_exists($request, 'withRouter'))
+            if ($request instanceof ServerRequest)
             {
-                return $request->withRouter($this->router());
+                return $request
+                    ->withCookiesContent($this->cookies())
+                    ->withSessionContent($this->session())
+                    ->withRouter($this->router());
             }
 
             return $request;
