@@ -11,6 +11,7 @@ use Bavix\Lumper\Bind;
 use Bavix\Processors\Factory;
 use Bavix\Router\Router;
 use Bavix\SDK\Path;
+use Bavix\Security\Password;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Builder
@@ -154,6 +155,22 @@ class Builder
     {
         return Bind::once(__METHOD__, function () {
             return new Flow(null, $this->config()->get('flow')->asArray());
+        });
+    }
+
+    /**
+     * @return Password
+     */
+    public function password(): Password
+    {
+        return Bind::once(__METHOD__, function () {
+
+            $slice = $this->config()->get('password');
+
+            return new Password(
+                $slice->getData('algo', PASSWORD_DEFAULT),
+                $slice->getData('options')
+            );
         });
     }
 
