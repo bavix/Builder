@@ -18,3 +18,8 @@ Builder - System of storage of objects of the project.
 * **Version**: [![Latest Stable Version](https://poser.pugx.org/bavix/builder/v/stable)](https://packagist.org/packages/bavix/builder)
 * **PHP Version**: 7.1+ 
 * **[Composer](https://getcomposer.org/):** `composer require bavix/builder`
+
+---
+Supported by
+
+[![Supported by JetBrains](https://cdn.rawgit.com/bavix/development-through/46475b4b/jetbrains.svg)](https://www.jetbrains.com/)
